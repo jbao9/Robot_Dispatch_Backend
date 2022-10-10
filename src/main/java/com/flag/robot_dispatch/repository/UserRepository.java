@@ -1,4 +1,4 @@
 package com.flag.robot_dispatch.repository;
 
-public class UserRepository {
+public interface UserRepository {
 }

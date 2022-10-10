@@ -10,10 +10,11 @@ import java.util.List;
 @Table(name = "vehicle_type")
 @JsonDeserialize(builder = VehicleType.Builder.class)
 public class VehicleType {
-    @Id
-//    @OneToMany(mappedBy = "vehicle_type", fetch = FetchType.EAGER)
-    private Long id;
 
+    @OneToMany(mappedBy = "vehicle_type", fetch = FetchType.EAGER)
+    private List<Vehicle> vehicle;
+
+    @Id
     @Enumerated(value = EnumType.STRING)
     @JsonProperty("machine_type")
     private MachineType type;
@@ -25,7 +26,7 @@ public class VehicleType {
     private int speed;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_url", referencedColumnName = "id")
+    @JoinColumn(name = "image_url")
     private VehicleImage image;
 
     // Upgrade features
@@ -36,12 +37,41 @@ public class VehicleType {
     }
 
     private VehicleType(Builder builder) {
+        this.vehicle = builder.vehicle;
+        this.image = builder.image;
+        this.type = builder.type;
+        this.speed = builder.speed;
+        this.volume_capacity = builder.volume_capacity;
+        this.weight_capacity = builder.weight_capacity;
+    }
 
+    public List<Vehicle> getvehicle() {
+        return vehicle;
+    }
+
+    public MachineType getType() {
+        return type;
+    }
+
+    public int getWeight_capacity() {
+        return weight_capacity;
+    }
+
+    public int getVolume_capacity() {
+        return volume_capacity;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public VehicleImage getImage() {
+        return image;
     }
 
     public static class Builder {
-        @JsonProperty("id")
-        private Long id;
+        @JsonProperty("vehicle")
+        private List<Vehicle> vehicle;
         @JsonProperty("type")
         private MachineType type;
         @JsonProperty("weight_capacity")
@@ -54,8 +84,8 @@ public class VehicleType {
         @JsonProperty("image")
         private VehicleImage image;
 
-        public Builder setId(Long id) {
-            this.id = id;
+        public Builder setId(List<Vehicle> vehicle) {
+            this.vehicle = vehicle;
             return this;
         }
 
@@ -84,7 +114,9 @@ public class VehicleType {
             return this;
         }
 
-        public VehicleType build() {return new VehicleType(this);}
+        public VehicleType build() {
+            return new VehicleType(this);
+        }
 
     }
 

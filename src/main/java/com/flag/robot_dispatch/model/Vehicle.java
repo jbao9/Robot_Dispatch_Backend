@@ -13,10 +13,14 @@ import java.util.List;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
+
     private String name;
-    private String status;
+
+    @Enumerated(value = EnumType.STRING)
+    @JsonProperty("status")
+    private Status status;
+
     private String location;
 
     @ManyToOne
@@ -32,6 +36,7 @@ public class Vehicle {
         this.name = builder.name;
         this.status = builder.status;
         this.location = builder.location;
+        this.type = builder.type;
 
 
     }
@@ -44,7 +49,7 @@ public class Vehicle {
         return name;
     }
 
-    public String getstatus() {
+    public Status getstatus() {
         return status;
     }
 
@@ -52,6 +57,9 @@ public class Vehicle {
         return location;
     }
 
+    public VehicleType getType() {
+        return type;
+    }
 
     public static class Builder {
 
@@ -62,10 +70,13 @@ public class Vehicle {
         private String name;
 
         @JsonProperty("status")
-        private String status;
+        private Status status;
 
         @JsonProperty("location")
         private String location;
+
+        @JsonProperty("type")
+        private VehicleType type;
 
 
         public Builder setId(Long id) {
@@ -78,7 +89,7 @@ public class Vehicle {
             return this;
         }
 
-        public Builder setstatus(String status) {
+        public Builder setstatus(Status status) {
             this.status = status;
             return this;
         }
@@ -88,6 +99,10 @@ public class Vehicle {
             return this;
         }
 
+        public Builder setType(VehicleType type) {
+            this.type = type;
+            return this;
+        }
 
         public Vehicle build() {
             return new Vehicle(this);
