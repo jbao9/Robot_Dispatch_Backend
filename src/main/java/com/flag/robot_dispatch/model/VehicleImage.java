@@ -1,5 +1,7 @@
 package com.flag.robot_dispatch.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
