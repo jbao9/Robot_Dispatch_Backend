@@ -30,8 +30,10 @@ public class VehicleType {
     private VehicleImage image;
 
     // TODO: Upgrade features
-//    private int range;
-//    private int unit_price;
+    //    private int unit_price;
+
+    private int delivery_range;
+
 
     public VehicleType() {
     }
@@ -43,6 +45,7 @@ public class VehicleType {
         this.speed = builder.speed;
         this.volume_capacity = builder.volume_capacity;
         this.weight_capacity = builder.weight_capacity;
+        this.delivery_range = builder.delivery_range;
     }
 
     public List<Vehicle> getvehicle() {
@@ -65,6 +68,8 @@ public class VehicleType {
         return speed;
     }
 
+    public int getRange() { return delivery_range; }
+
     public VehicleImage getImage() {
         return image;
     }
@@ -83,6 +88,9 @@ public class VehicleType {
 
         @JsonProperty("image")
         private VehicleImage image;
+
+        @JsonProperty("delivery_range")
+        private int delivery_range;
 
         public Builder setId(List<Vehicle> vehicle) {
             this.vehicle = vehicle;
@@ -111,6 +119,11 @@ public class VehicleType {
 
         public Builder setImage(VehicleImage image) {
             this.image = image;
+            return this;
+        }
+
+        public Builder setRange(int delivery_range) {
+            this.delivery_range = delivery_range;
             return this;
         }
 

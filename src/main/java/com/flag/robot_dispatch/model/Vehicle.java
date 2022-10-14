@@ -30,7 +30,7 @@ public class Vehicle {
     private VehicleType type;
 
 
-    private int range;
+//    private int range;
 
 
     public Vehicle() {
@@ -42,7 +42,7 @@ public class Vehicle {
         this.status = builder.status;
         this.location = builder.location;
         this.type = builder.type;
-        this.range = builder.range;
+//        this.range = builder.range;
     }
 
     public Long getId() {
@@ -65,7 +65,7 @@ public class Vehicle {
         return type;
     }
 
-    public int getRange() { return range; }
+//    public int getRange() { return range; }
 
     public static class Builder {
 
@@ -84,8 +84,8 @@ public class Vehicle {
         @JsonProperty("type")
         private VehicleType type;
 
-        @JsonProperty("range")
-        private int range;
+//        @JsonProperty("range")
+//        private int range;
 
 
         public Builder setId(Long id) {
@@ -113,10 +113,10 @@ public class Vehicle {
             return this;
         }
 
-        public Builder setRange(int range) {
-            this.range = range;
-            return this;
-        }
+//        public Builder setRange(int range) {
+//            this.range = range;
+//            return this;
+//        }
 
         public Vehicle build() {
             return new Vehicle(this);
