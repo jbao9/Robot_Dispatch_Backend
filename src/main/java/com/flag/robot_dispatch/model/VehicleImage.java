@@ -13,7 +13,7 @@ public class VehicleImage implements Serializable {
     @Id
     private String url;
 
-    @OneToOne(mappedBy = "vehicle_image")
+    @OneToOne(mappedBy = "image")
     private VehicleType type;
 
     public VehicleImage() {}
@@ -32,12 +32,12 @@ public class VehicleImage implements Serializable {
         return this;
     }
 
-    public VehicleType getStay() {
+    public VehicleType getVehicleType() {
         return type;
     }
 
-    public VehicleImage setStay(VehicleType stay) {
-        this.type = stay;
+    public VehicleImage setVehicleType(VehicleType type) {
+        this.type = type;
         return this;
     }
 }

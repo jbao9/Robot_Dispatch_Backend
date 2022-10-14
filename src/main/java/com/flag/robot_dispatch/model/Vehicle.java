@@ -21,11 +21,16 @@ public class Vehicle {
     @JsonProperty("status")
     private Status status;
 
-    private String location;
+    @ManyToOne
+    @JoinColumn(name = "center_id")
+    private DispatchCenter location;
 
     @ManyToOne
     @JoinColumn(name = "machine_type")
     private VehicleType type;
+
+
+    private int range;
 
 
     public Vehicle() {
@@ -37,8 +42,7 @@ public class Vehicle {
         this.status = builder.status;
         this.location = builder.location;
         this.type = builder.type;
-
-
+        this.range = builder.range;
     }
 
     public Long getId() {
@@ -49,17 +53,19 @@ public class Vehicle {
         return name;
     }
 
-    public Status getstatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public String getlocation() {
+    public DispatchCenter getLocation() {
         return location;
     }
 
     public VehicleType getType() {
         return type;
     }
+
+    public int getRange() { return range; }
 
     public static class Builder {
 
@@ -73,10 +79,13 @@ public class Vehicle {
         private Status status;
 
         @JsonProperty("location")
-        private String location;
+        private DispatchCenter location;
 
         @JsonProperty("type")
         private VehicleType type;
+
+        @JsonProperty("range")
+        private int range;
 
 
         public Builder setId(Long id) {
@@ -89,18 +98,23 @@ public class Vehicle {
             return this;
         }
 
-        public Builder setstatus(Status status) {
+        public Builder setStatus(Status status) {
             this.status = status;
             return this;
         }
 
-        public Builder setlocation(String location) {
+        public Builder setLocation(DispatchCenter location) {
             this.location = location;
             return this;
         }
 
         public Builder setType(VehicleType type) {
             this.type = type;
+            return this;
+        }
+
+        public Builder setRange(int range) {
+            this.range = range;
             return this;
         }
 

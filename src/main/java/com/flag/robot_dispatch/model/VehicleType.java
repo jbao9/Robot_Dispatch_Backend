@@ -11,7 +11,7 @@ import java.util.List;
 @JsonDeserialize(builder = VehicleType.Builder.class)
 public class VehicleType {
 
-    @OneToMany(mappedBy = "vehicle_type", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     private List<Vehicle> vehicle;
 
     @Id
@@ -29,7 +29,7 @@ public class VehicleType {
     @JoinColumn(name = "image_url")
     private VehicleImage image;
 
-    // Upgrade features
+    // TODO: Upgrade features
 //    private int range;
 //    private int unit_price;
 
