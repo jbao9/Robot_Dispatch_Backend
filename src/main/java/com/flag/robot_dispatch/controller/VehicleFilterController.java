@@ -23,7 +23,7 @@ public class VehicleFilterController {
         this.geoCodingService = geoCodingService;
     }
 
-    @GetMapping("/vehicle")
+    @GetMapping("/vehiclefilter")
     public List<Vehicle> getFilteredVehicles(
             @RequestParam(name = "pickup_address") String pickupAddress,
             @RequestParam(name = "delivery_address") String deliveryAddress,
