@@ -37,15 +37,9 @@ public class VehicleFilterService {
     }
 
     public List<Vehicle> filterAvailableVehicles(List<VehicleFilter> vehicleFilterList) {
-        // TODO: is this correct??
-        VehicleFilter andVehicleFilter = new AndVehicleFilter(vehicleFilterList);
-        return andVehicleFilter.checkCondition(findAvailableVehicles());
-    }
-
-    // get available vehicles
-    public List<Vehicle> findAvailableVehicles() {
         this.availableVehicles = vehicleRepository.findByStatus(Status.available);
-        return this.availableVehicles;
-    }
 
+        VehicleFilter andVehicleFilter = new AndVehicleFilter(vehicleFilterList);
+        return andVehicleFilter.checkCondition(this.availableVehicles);
+    }
 }

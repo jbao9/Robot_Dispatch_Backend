@@ -23,7 +23,7 @@ public class VehicleFilterController {
         this.geoCodingService = geoCodingService;
     }
 
-    @GetMapping("/availablevehicles")
+    @GetMapping("/available_vehicles")
     public List<Vehicle> getFilteredVehicles(
             @RequestParam(name = "pickup_address") String pickupAddress,
             @RequestParam(name = "delivery_address") String deliveryAddress,
@@ -36,7 +36,7 @@ public class VehicleFilterController {
         // TODO: TimeUtil.getTimeRequirement
         int timeRequirement = 0;
 
-        List<Vehicle> filteredAvailableVehicles = vehicleFilterService.findAvailableVehicles();
+        // Build the vehicleFilterList
         List<VehicleFilter> vehicleFilterList =
                 vehicleFilterService.buildFilterList(
                         pickupLocation,
@@ -45,8 +45,8 @@ public class VehicleFilterController {
                         volumeRequirement,
                         weightRequirement);
 
-        vehicleFilterService.filterAvailableVehicles(vehicleFilterList);
-        return filteredAvailableVehicles;
+        // filter all the available vehicles
+        return vehicleFilterService.filterAvailableVehicles(vehicleFilterList);
     }
 
 }
