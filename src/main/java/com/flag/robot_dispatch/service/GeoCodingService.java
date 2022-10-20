@@ -22,13 +22,13 @@ public class GeoCodingService {
         this.context = context;
     }
 
-    public Location getLatLng(Long id, String address) throws GeoCodingException {
+    public Location getLatLng(String address) throws GeoCodingException {
         try {
             GeocodingResult result = GeocodingApi.geocode(context, address).await()[0];
             if(result.partialMatch){
                 throw new InvalidStayAddressException("Fail to find the address");
             }
-            return new Location(id, new GeoPoint(result.geometry.location.lat, result.geometry.location.lng));
+            return new Location(new GeoPoint(result.geometry.location.lat, result.geometry.location.lng));
         } catch (IOException | ApiException | InterruptedException e) {
             e.printStackTrace();
             throw new GeoCodingException("Failed to encode address");

@@ -5,8 +5,10 @@ public class Location {
     private Long id;
     private GeoPoint geoPoint;
 
-    public Location(Long id, GeoPoint geoPoint) {
-        this.id = id;
+    public Location() {
+    }
+
+    public Location(GeoPoint geoPoint) {
         this.geoPoint = geoPoint;
     }
 
