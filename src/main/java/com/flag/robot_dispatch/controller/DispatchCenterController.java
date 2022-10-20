@@ -18,12 +18,12 @@ public class DispatchCenterController {
 
     @PostMapping("/centers")
     public void addCenter(
-            @RequestParam("id") String id,
+            @RequestParam("id") Long id,
             @RequestParam("address") String address,
-            @RequestParam("lat") double lat,
-            @RequestParam("lon") double lon)
+            @RequestParam("name") String name
+            )
     {
-        DispatchCenter center = new DispatchCenter(id, address, lat, lon);
+        DispatchCenter center = new DispatchCenter(id, address, name);
         dispatchCenterService.add(center);
     }
 
