@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DispatchCenterService {
-    private final DispatchCenterRepository dispatchCenterRepository;
+    private DispatchCenterRepository dispatchCenterRepository;
 
     @Autowired
     private DispatchCenterService(DispatchCenterRepository dispatchCenterRepository) {

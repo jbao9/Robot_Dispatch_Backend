@@ -12,21 +12,42 @@ public class DispatchCenter extends Location{
     @Id
     private Long id;
     private String address;
-    private String Name;
+    private String name;
+    private double lon;
+    private double lat;
 
     public DispatchCenter() {}
 
-    public DispatchCenter(Long id, String address, String name) {
+    public DispatchCenter(Long id, String address, String name, double lon, double lat) {
         this.id = id;
         this.address = address;
-        Name = name;
+        this.name = name;
+        this.lon = lon;
+        this.lat = lat;
+
     }
 
-    public DispatchCenter(GeoPoint geoPoint, Long id, String address, String name) {
-        super(geoPoint);
-        this.id = id;
-        this.address = address;
-        Name = name;
+//    public DispatchCenter(GeoPoint geoPoint, Long id, String address, String name) {
+//        super(geoPoint);
+//        this.id = id;
+//        this.address = address;
+//        Name = name;
+//    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
     @Override
@@ -49,11 +70,11 @@ public class DispatchCenter extends Location{
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public DispatchCenter setName(String name) {
-        Name = name;
+        this.name = name;
         return this;
     }
 }
