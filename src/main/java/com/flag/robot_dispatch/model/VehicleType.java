@@ -25,9 +25,9 @@ public class VehicleType {
 
     private int speed;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_url")
-    private VehicleImage image;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "image_url")
+//    private VehicleImage image;
 
     // TODO: Upgrade features
     //    private int unit_price;
@@ -40,7 +40,7 @@ public class VehicleType {
 
     private VehicleType(Builder builder) {
         this.vehicle = builder.vehicle;
-        this.image = builder.image;
+//        this.image = builder.image;
         this.type = builder.type;
         this.speed = builder.speed;
         this.volume_capacity = builder.volume_capacity;
@@ -70,9 +70,14 @@ public class VehicleType {
 
     public int getRange() { return delivery_range; }
 
-    public VehicleImage getImage() {
-        return image;
-    }
+//    public VehicleImage getImage() {
+//        return image;
+//    }
+//
+//    public VehicleType setImages(VehicleImage image) {
+//        this.image = image;
+//        return this;
+//    }
 
     public static class Builder {
         @JsonProperty("vehicle")
@@ -85,9 +90,9 @@ public class VehicleType {
         private int volume_capacity;
         @JsonProperty("speed")
         private int speed;
-
-        @JsonProperty("image")
-        private VehicleImage image;
+//
+//        @JsonProperty("image")
+//        private VehicleImage image;
 
         @JsonProperty("delivery_range")
         private int delivery_range;
@@ -117,10 +122,10 @@ public class VehicleType {
             return this;
         }
 
-        public Builder setImage(VehicleImage image) {
-            this.image = image;
-            return this;
-        }
+//        public Builder setImage(VehicleImage image) {
+//            this.image = image;
+//            return this;
+//        }
 
         public Builder setRange(int delivery_range) {
             this.delivery_range = delivery_range;
