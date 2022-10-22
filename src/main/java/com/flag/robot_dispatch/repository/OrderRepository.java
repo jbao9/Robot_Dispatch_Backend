@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findByUser(User guest);
+    List<Order> findByGuest(User guest);
 
-    Order findByIdAndUser(Long id, User guest);
+    Order findByOrderIdAndGuest(Long orderId, User guest);
 }
