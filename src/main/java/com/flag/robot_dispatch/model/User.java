@@ -1,8 +1,7 @@
 package com.flag.robot_dispatch.model;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -17,6 +16,9 @@ public class User implements Serializable {
    private String username;
    private String password;
    private boolean enabled;
+
+   @OneToMany(mappedBy = "guest", fetch = FetchType.EAGER)     //new added
+   private List<Order> orders;                                    //new added
 
    public User() {}
 

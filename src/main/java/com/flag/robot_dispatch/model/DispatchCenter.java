@@ -4,6 +4,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 import javax.naming.Name;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "center")
@@ -13,6 +14,10 @@ public class DispatchCenter extends Location{
     private Long id;
     private String address;
     private String Name;
+
+
+    @OneToMany(mappedBy = "center", fetch = FetchType.LAZY)     //new added
+    private List<Order> orders;                                    //new added
 
     public DispatchCenter() {}
 
