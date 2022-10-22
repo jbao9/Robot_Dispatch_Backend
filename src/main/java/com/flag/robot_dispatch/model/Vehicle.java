@@ -29,6 +29,8 @@ public class Vehicle {
     @JoinColumn(name = "machine_type")
     private VehicleType type;
 
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)     //new added
+    private List<Order> orders;                                    //new added
 
 //    private int range;
 
