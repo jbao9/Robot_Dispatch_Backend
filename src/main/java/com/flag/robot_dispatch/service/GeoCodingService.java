@@ -1,7 +1,7 @@
 package com.flag.robot_dispatch.service;
 
 import com.flag.robot_dispatch.exception.GeoCodingException;
-import com.flag.robot_dispatch.exception.InvalidStayAddressException;
+import com.flag.robot_dispatch.exception.InvalidAddressException;
 import com.flag.robot_dispatch.model.Location;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
@@ -26,7 +26,7 @@ public class GeoCodingService {
         try {
             GeocodingResult result = GeocodingApi.geocode(context, address).await()[0];
             if(result.partialMatch){
-                throw new InvalidStayAddressException("Fail to find the address");
+                throw new InvalidAddressException("Fail to find the address");
             }
             return new Location(new GeoPoint(result.geometry.location.lat, result.geometry.location.lng));
         } catch (IOException | ApiException | InterruptedException e) {
