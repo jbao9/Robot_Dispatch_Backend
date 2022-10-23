@@ -39,7 +39,7 @@ public class VehicleFilterService {
         /** hard code available vehicle list for testing */
         Long numLong = Long.valueOf(3);
         availableVehicles = new ArrayList<>();
-        for (int i = 10; i < 100; i++) {
+        for (int i = 5; i < 100; i++) {
             availableVehicles.add(
                     new Vehicle.Builder()
                             .setName("Vehicle No." + i).
@@ -48,8 +48,8 @@ public class VehicleFilterService {
                                     setType("Drone_Heavy").
                                     setWeight_capacity(i).
                                     setVolume_capacity(i).
-                                    setSpeed(i).
-                                    setRange(i).
+                                    setSpeed(i-5).
+                                    setRange(5 + i).
                                     build()).
                             setLocation(new DispatchCenter(
                                     numLong,

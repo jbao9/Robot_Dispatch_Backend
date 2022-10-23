@@ -13,8 +13,9 @@ public class VehicleSpeedFilter implements VehicleFilter {
     private double timeRequirement;
     private Location pickupLocation;
     private Location deliveryLocation;
-
     private DistanceService distanceService = new DistanceService();
+
+    private static final double SPEED_RATIO = 1.5;
 
 
     public VehicleSpeedFilter(double timeRequirement, Location pickupLocation, Location deliveryLocation) {
@@ -29,7 +30,7 @@ public class VehicleSpeedFilter implements VehicleFilter {
         List<Vehicle> filteredAvailableVehicles = new ArrayList<>();
         for (Vehicle vehicle : availableVehicles) {
             double totalDistance = distanceService.getTotalDistance(vehicle.getLocation(), pickupLocation, deliveryLocation);
-            if (vehicle.getType().getSpeed() >= totalDistance / timeRequirement) {
+            if (vehicle.getType().getSpeed() >= (totalDistance / timeRequirement) * SPEED_RATIO) {
                 filteredAvailableVehicles.add(vehicle);
             }
         }

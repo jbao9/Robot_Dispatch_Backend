@@ -13,6 +13,8 @@ public class VehicleRangeFilter implements VehicleFilter {
     private Location deliveryLocation;
     private DistanceService distanceService = new DistanceService();
 
+    private static final double RANGE_RATIO = 1.5;
+
     public VehicleRangeFilter(Location pickupLocation, Location deliveryLocation) {
         this.pickupLocation = pickupLocation;
         this.deliveryLocation = deliveryLocation;
@@ -24,7 +26,7 @@ public class VehicleRangeFilter implements VehicleFilter {
 
         for (Vehicle vehicle : availableVehicles) {
             double totalDistance = distanceService.getTotalDistance(vehicle.getLocation(), pickupLocation, deliveryLocation);
-            if (vehicle.getType().getRange() >= totalDistance) {
+            if (vehicle.getType().getRange() >= totalDistance * RANGE_RATIO) {
                 filteredVehicles.add(vehicle);
             }
         }
