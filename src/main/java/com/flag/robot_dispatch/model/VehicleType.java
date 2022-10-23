@@ -15,9 +15,9 @@ public class VehicleType {
     private List<Vehicle> vehicle;
 
     @Id
-    @Enumerated(value = EnumType.STRING)
+//    @Enumerated(value = EnumType.STRING)
     @JsonProperty("machine_type")
-    private MachineType type;
+    private String type;
 
     private int weight_capacity;
 
@@ -38,8 +38,7 @@ public class VehicleType {
     public VehicleType() {
     }
 
-    private VehicleType(Builder builder) {
-        this.vehicle = builder.vehicle;
+    public VehicleType(Builder builder) {
 //        this.image = builder.image;
         this.type = builder.type;
         this.speed = builder.speed;
@@ -48,11 +47,8 @@ public class VehicleType {
         this.delivery_range = builder.delivery_range;
     }
 
-    public List<Vehicle> getvehicle() {
-        return vehicle;
-    }
 
-    public MachineType getType() {
+    public String getType() {
         return type;
     }
 
@@ -80,10 +76,8 @@ public class VehicleType {
 //    }
 
     public static class Builder {
-        @JsonProperty("vehicle")
-        private List<Vehicle> vehicle;
         @JsonProperty("type")
-        private MachineType type;
+        private String type;
         @JsonProperty("weight_capacity")
         private int weight_capacity;
         @JsonProperty("volume_capacity")
@@ -93,16 +87,11 @@ public class VehicleType {
 //
 //        @JsonProperty("image")
 //        private VehicleImage image;
-
         @JsonProperty("delivery_range")
         private int delivery_range;
 
-        public Builder setId(List<Vehicle> vehicle) {
-            this.vehicle = vehicle;
-            return this;
-        }
 
-        public Builder setType(MachineType type) {
+        public Builder setType(String type) {
             this.type = type;
             return this;
         }

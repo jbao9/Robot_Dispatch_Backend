@@ -34,10 +34,10 @@ public class VehicleTypeController {
             @RequestParam("delivery_range") int range
     ) {
 //        MachineType machineType = MachineType.valueOf(type);
-        MachineType machineType = MachineType.Drone_Heavy;
+//        MachineType machineType = MachineType.Drone_Heavy;
 //        System.out.print(machineType);
         VehicleType vehicleType = new VehicleType.Builder()
-                .setType(machineType)
+                .setType(type)
                 .setSpeed(speed)
                 .setVolume_capacity(volume)
                 .setWeight_capacity(weight)
