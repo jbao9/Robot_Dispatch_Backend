@@ -2,9 +2,7 @@ package com.flag.robot_dispatch.filter;
 
 import com.flag.robot_dispatch.model.Location;
 import com.flag.robot_dispatch.model.Vehicle;
-import com.flag.robot_dispatch.util.DistanceService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.flag.robot_dispatch.service.DistanceService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
+
+import java.lang.invoke.VarHandle;
+
+import static com.flag.robot_dispatch.model.MachineType.*;
 
 // TODO: Not Done Yet.
 
@@ -29,6 +32,31 @@ public class VehicleController {
             @RequestParam("center_id") DispatchCenter center_id,
             @RequestParam("machine_type") VehicleType machine_type
     ) {
+
+    /**
+        get objects from frontend could be problematic
+        This can be a factory pattern or a switch statement to get object from backend
+        MachineType machine_type = null;
+        switch (type) {
+            case "Robot_light":
+                machine_type = Robot_light;
+                break;
+            case "Robot_Heavy":
+                machine_type = Robot_Heavy;
+                break;
+            case "Drone_light":
+                machine_type = Drone_light;
+                break;
+            case "Drone_Heavy":
+                machine_type = Drone_Heavy;
+                break;
+        }
+
+        if (machine_type == null) {
+            throw new RuntimeException();
+        }
+*/
+
         Vehicle vehicle = new Vehicle.Builder()
                 .setName(name).setStatus(status).setType(machine_type).setLocation(center_id).build();
         vehicleService.addVehicle(vehicle);

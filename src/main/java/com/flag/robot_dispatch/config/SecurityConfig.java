@@ -19,50 +19,52 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-   @Autowired
-   private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-   @Autowired
-   private JwtFilter jwtFilter;
+    @Autowired
+    private JwtFilter jwtFilter;
 
-   @Override
-   protected void configure(HttpSecurity http) throws Exception {
-      http
-              .authorizeRequests()
-              .antMatchers(HttpMethod.POST, "/register/*").permitAll()
-              .antMatchers(HttpMethod.POST, "/authenticate/*").permitAll()
-              // .antMatchers("/stays").hasAuthority("ROLE_HOST")
-              // .antMatchers("/stays/*").hasAuthority("ROLE_HOST")
-              // .antMatchers("/search").hasAuthority("ROLE_GUEST")
-              // .antMatchers("/reservations").hasAuthority("ROLE_GUEST")
-              // .antMatchers("/reservations/*").hasAuthority("ROLE_GUEST")
-              .anyRequest().authenticated()
-              .and()
-              .csrf()
-              .disable();
-      http
-              .sessionManagement()
-              .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-              .and()
-              .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-   }
+    // TODO: NEED TO SETUP THE SECURITY CONFIG
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/register/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/authenticate/*").permitAll()
+                // .antMatchers("/stays").hasAuthority("ROLE_HOST")
+                // .antMatchers("/stays/*").hasAuthority("ROLE_HOST")
+                // .antMatchers("/search").hasAuthority("ROLE_GUEST")
+                // .antMatchers("/reservations").hasAuthority("ROLE_GUEST")
+                // .antMatchers("/reservations/*").hasAuthority("ROLE_GUEST")
+                .antMatchers("/centers/*").hasAuthority("ROLE_ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .csrf()
+                .disable();
+        http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+    }
 
-   @Bean
-   public PasswordEncoder passwordEncoder() {
-      return new BCryptPasswordEncoder();
-   }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-   @Override
-   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-      auth.jdbcAuthentication().dataSource(dataSource)
-              .passwordEncoder(passwordEncoder())
-              .usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?")
-              .authoritiesByUsernameQuery("SELECT username, authority FROM authority WHERE username = ?");
-   }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username, authority FROM authority WHERE username = ?");
+    }
 
-   @Override
-   @Bean
-   public AuthenticationManager authenticationManagerBean() throws Exception {
-      return super.authenticationManagerBean();
-   }
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 }

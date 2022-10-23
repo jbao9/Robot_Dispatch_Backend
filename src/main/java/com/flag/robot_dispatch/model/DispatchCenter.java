@@ -55,7 +55,6 @@ public class DispatchCenter extends Location{
         this.lat = lat;
     }
 
-    @Override
     public Long getId() {
         return id;
     }
