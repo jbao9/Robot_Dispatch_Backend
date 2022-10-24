@@ -37,11 +37,8 @@ public class DistanceService {
                 * Math.pow(Math.sin(dlon / 2), 2);
 
         double c = 2 * Math.asin(Math.sqrt(x));
-
-        // Radius of earth:
-        // 6371 in kilometers/3956 in miles
+        // Radius of earth: 6371 in kilometers/3956 in miles
         double r = 3956;
-
         // calculate the result
         return (c * r);
     }

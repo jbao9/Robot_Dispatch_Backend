@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class VehicleFilterService {
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
     private List<Vehicle> availableVehicles;
 
     @Autowired
@@ -23,13 +23,15 @@ public class VehicleFilterService {
     public List<VehicleFilter> buildFilterList(Location pickupLocation,
                                                Location deliveryLocation,
                                                double timeRequirement,
-                                               int volumeRequirement,
+                                               int lengthRequirement,
+                                               int widthRequirement,
+                                               int heightRequirement,
                                                int weightRequirement) {
 
         List<VehicleFilter> vehicleFilterList = new ArrayList<>();
         vehicleFilterList.add(new VehicleSpeedFilter(timeRequirement, pickupLocation, deliveryLocation));
         vehicleFilterList.add(new VehicleRangeFilter(pickupLocation, deliveryLocation));
-        vehicleFilterList.add(new VehicleCapacityFilter(volumeRequirement, weightRequirement));
+        vehicleFilterList.add(new VehicleCapacityFilter(lengthRequirement, widthRequirement, heightRequirement, weightRequirement));
         return vehicleFilterList;
     }
 
@@ -37,7 +39,7 @@ public class VehicleFilterService {
 //        availableVehicles = vehicleRepository.findByStatus(Status.available);
 
         /** hard code available vehicle list for testing */
-        Long numLong = Long.valueOf(3);
+        Long numLong = 3L;
         availableVehicles = new ArrayList<>();
         for (int i = 10; i < 100; i++) {
             availableVehicles.add(
@@ -45,9 +47,11 @@ public class VehicleFilterService {
                             .setName("Vehicle No." + i).
                             setStatus(Status.available).
                             setType(new VehicleType.Builder().
-                                    setType("Drone_Heavy").
+                                    setType(MachineType.Drone_Heavy).
+                                    setLength_capacity(i).
+                                    setWidth_capacity(i).
+                                    setHeight_capacity(i).
                                     setWeight_capacity(i).
-                                    setVolume_capacity(i).
                                     setSpeed(i).
                                     setRange(i).
                                     build()).
@@ -59,7 +63,6 @@ public class VehicleFilterService {
                                     37.7102661)).
                             build());
         }
-        /** */
 
         VehicleFilter andVehicleFilter = new AndVehicleFilter(vehicleFilterList);
         return andVehicleFilter.checkCondition(availableVehicles);

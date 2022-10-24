@@ -34,8 +34,11 @@ public class VehicleFilterController {
             @RequestParam(name = "delivery_address") String deliveryAddress,
             @RequestParam(name = "pickup_time") String pickupTime,
             @RequestParam(name = "delivery_time") String deliveryTime,
-            @RequestParam(name = "delivery_volume") int volumeRequirement,
-            @RequestParam(name = "delivery_weight") int weightRequirement) {
+            @RequestParam(name = "delivery_length") int lengthRequirement,
+            @RequestParam(name = "delivery_width") int widthRequirement,
+            @RequestParam(name = "delivery_height") int heightRequirement,
+            @RequestParam(name = "delivery_weight") int weightRequirement
+            ) {
 
         Location pickupLocation = geoCodingService.getLatLng(pickupAddress);
         Location deliveryLocation = geoCodingService.getLatLng(deliveryAddress);
@@ -47,7 +50,9 @@ public class VehicleFilterController {
                         pickupLocation,
                         deliveryLocation,
                         timeRequirement,
-                        volumeRequirement,
+                        lengthRequirement,
+                        widthRequirement,
+                        heightRequirement,
                         weightRequirement);
 
         // filter all the available vehicles
