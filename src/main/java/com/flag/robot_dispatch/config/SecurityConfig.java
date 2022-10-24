@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .antMatchers("/search").hasAuthority("ROLE_GUEST")
                 // .antMatchers("/reservations").hasAuthority("ROLE_GUEST")
                 // .antMatchers("/reservations/*").hasAuthority("ROLE_GUEST")
-                .antMatchers("/centers/*").hasAuthority("ROLE_ADMIN")
+//                .antMatchers("/centers/*").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
