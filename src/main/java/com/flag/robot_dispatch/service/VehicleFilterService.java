@@ -45,9 +45,9 @@ public class VehicleFilterService {
                             .setName("Vehicle No." + i).
                             setStatus(Status.available).
                             setType(new VehicleType.Builder().
-                                    setType("Drone_Heavy").
+                                    setType(MachineType.Drone_Heavy).
                                     setWeight_capacity(i).
-                                    setVolume_capacity(i).
+//                                    setVolume_capacity(i).
                                     setSpeed(i).
                                     setRange(i).
                                     build()).

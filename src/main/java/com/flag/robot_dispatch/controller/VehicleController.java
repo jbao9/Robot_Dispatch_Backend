@@ -27,10 +27,11 @@ public class VehicleController {
 
     @PostMapping(value = "/vehicles")
     public void addVehicle(
+            @RequestParam("id") Long id,
             @RequestParam("name") String name,
-            @RequestParam("status") Status status,
-            @RequestParam("center_id") DispatchCenter center_id,
-            @RequestParam("machine_type") VehicleType machine_type
+            @RequestParam("status") String status,
+            @RequestParam("center_id") Long center_id,
+            @RequestParam("vehicle_type") String type
     ) {
 
     /**
@@ -56,9 +57,16 @@ public class VehicleController {
             throw new RuntimeException();
         }
 */
+        Status status1 = Status.valueOf(status);
+        MachineType machineType = MachineType.valueOf(type);
+
+        DispatchCenter dispatchCenter = new DispatchCenter();
 
         Vehicle vehicle = new Vehicle.Builder()
-                .setName(name).setStatus(status).setType(machine_type).setLocation(center_id).build();
+                .setName(name).setStatus(status1).build();
+//        .setType(machineType).setLocation(center_id)
+        vehicle.setType(new VehicleType.Builder().setType(machineType).build());
+        vehicle.setCenter(dispatchCenter.setId(center_id));
         vehicleService.addVehicle(vehicle);
     }
 
