@@ -36,9 +36,9 @@ public class VehicleFilterService {
     }
 
     public List<Vehicle> filterAvailableVehicles(List<VehicleFilter> vehicleFilterList) {
-//        availableVehicles = vehicleRepository.findByStatus(Status.available);
+        availableVehicles = vehicleRepository.findByStatus(Status.available);
 
-        /** hard code available vehicle list for testing */
+        /** hard code available vehicle list for testing
         Long numLong = 3L;
         availableVehicles = new ArrayList<>();
         for (int i = 10; i < 100; i++) {
@@ -63,6 +63,7 @@ public class VehicleFilterService {
                                     37.7102661)).
                             build());
         }
+         */
 
         VehicleFilter andVehicleFilter = new AndVehicleFilter(vehicleFilterList);
         return andVehicleFilter.checkCondition(availableVehicles);
