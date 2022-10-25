@@ -11,7 +11,10 @@ import java.util.List;
 @Table(name = "vehicle")
 @JsonDeserialize(builder = Vehicle.Builder.class)
 public class Vehicle {
+    private static final long serialVersionUID = 1L;
+
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -66,6 +69,11 @@ public class Vehicle {
 
     public Vehicle setType(VehicleType type) {
         this.type = type;
+        return this;
+    }
+
+    public Vehicle setId(Long id) {
+        this.id = id;
         return this;
     }
 
