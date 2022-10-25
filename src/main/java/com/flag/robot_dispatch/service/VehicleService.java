@@ -19,12 +19,8 @@ public class VehicleService {
         this.vehicleRepository = vehicleRepository;
     }
 
-    public Vehicle addVehicle (Vehicle vehicle) {
-        if(canAddVehicle(vehicle)){
-            return vehicleRepository.save(vehicle);
-        } else {
-            throw new VehicleAlreadyExistException("Vehicle Already Exist");
-        }
+    public void addVehicle (Vehicle vehicle) {
+            vehicleRepository.save(vehicle);
     }
 
     public void deleteVehicle(Long id) {
