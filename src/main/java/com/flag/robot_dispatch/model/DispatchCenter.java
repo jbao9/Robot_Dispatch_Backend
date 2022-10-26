@@ -35,10 +35,10 @@ public class DispatchCenter extends Location{
 
     public DispatchCenter(Builder builder) {
         this.id = builder.id;
-        this.address = address;
-        this.name = name;
-        this.lon = lon;
-        this.lat = lat;
+        this.address = builder.address;
+        this.name = builder.name;
+        this.lon = builder.lon;
+        this.lat = builder.lat;
     }
 
 //    public DispatchCenter(GeoPoint geoPoint, Long id, String address, String name) {
