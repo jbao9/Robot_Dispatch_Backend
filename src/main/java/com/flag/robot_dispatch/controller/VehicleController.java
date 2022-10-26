@@ -52,11 +52,15 @@ public class VehicleController {
     @GetMapping(value = "/vehicles/center/{center}")
     public List<Vehicle> listVehicleByCenter(@PathVariable Long center) {
         return vehicleService.listByCenter(center);
-//        return 1;
     }
 
-    @GetMapping(value = "/vehicles/{name}")
-    public Vehicle listVehicleByCenter(@PathVariable String name) {
-        return vehicleService.listByName(name);
+    @GetMapping(value = "/vehicles/{id}")
+    public Vehicle getVehicleById(@PathVariable Long id) {
+        return vehicleService.findById(id);
+    }
+
+    @DeleteMapping(value = "/vehicles/{id}")
+    public void deleteVehicle(@PathVariable Long id) {
+        vehicleService.deleteVehicle(id);
     }
 }

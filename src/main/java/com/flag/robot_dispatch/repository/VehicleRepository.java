@@ -19,5 +19,5 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query("SELECT v FROM Vehicle v WHERE v.location = :center")
     List<Vehicle> findById(DispatchCenter center);
 
-    Vehicle findByName(String name);
+    Vehicle findByIdIs(Long id);
 }

@@ -31,18 +31,18 @@ public class VehicleService {
         return vehicleRepository.findById(new DispatchCenter.Builder().setId(center_id).build());
     }
 
-    public Vehicle listByName(String name) {
-        return vehicleRepository.findByName(name);
+    public Vehicle findById(Long id) {
+        return vehicleRepository.findByIdIs(id);
     }
 
 
-//    public void deleteVehicle(Long id) {
-//        try {
-//            vehicleRepository.deleteById(id);
-//        } catch (Exception e) {
-//            throw new VehicleNotExistException("Vehicle Does Not Exist");
-//        }
-//    }
+    public void deleteVehicle(Long id) {
+        try {
+            vehicleRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new VehicleNotExistException("Vehicle Does Not Exist");
+        }
+    }
 //
 //    public Vehicle updateVehicle(Vehicle vehicle){
 //        Vehicle prevVehicle = vehicleRepository.getReferenceById(vehicle.getId());
