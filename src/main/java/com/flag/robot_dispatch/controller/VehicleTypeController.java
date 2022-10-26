@@ -38,8 +38,11 @@ public class VehicleTypeController {
                 .build();
         vehicleTypeService.add(vehicleType);
     }
+
+    @GetMapping(value = "/vehicletype/{type}")
+    public VehicleType getType(@PathVariable String type) {
+        return vehicleTypeService.getType(type);
+    }
+
 }
 
-
-//        MachineType machineType = MachineType.Drone_Heavy;
-//        System.out.print(machineType);

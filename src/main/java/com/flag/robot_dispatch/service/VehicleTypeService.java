@@ -1,6 +1,7 @@
 package com.flag.robot_dispatch.service;
 
 //import com.flag.robot_dispatch.model.VehicleImage;
+import com.flag.robot_dispatch.model.MachineType;
 import com.flag.robot_dispatch.model.VehicleType;
 import com.flag.robot_dispatch.repository.VehicleTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,10 @@ public class VehicleTypeService {
     public void add(VehicleType type) {
 //        type.setImages(stayImages);
         vehicleTypeRepository.save(type);
+    }
+
+    public VehicleType getType(String type) {
+        MachineType machineType = MachineType.valueOf(type);
+        return vehicleTypeRepository.findByTypeIs(machineType);
     }
 }
