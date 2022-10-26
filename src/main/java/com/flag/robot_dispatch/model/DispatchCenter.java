@@ -1,5 +1,6 @@
 package com.flag.robot_dispatch.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 import javax.naming.Name;
@@ -23,13 +24,21 @@ public class DispatchCenter extends Location{
 
     public DispatchCenter() {}
 
-    public DispatchCenter(Long id, String address, String name, double lon, double lat) {
-        this.id = id;
+//    public DispatchCenter(Long id, String address, String name, double lon, double lat) {
+//        this.id = id;
+//        this.address = address;
+//        this.name = name;
+//        this.lon = lon;
+//        this.lat = lat;
+//
+//    }
+
+    public DispatchCenter(Builder builder) {
+        this.id = builder.id;
         this.address = address;
         this.name = name;
         this.lon = lon;
         this.lat = lat;
-
     }
 
 //    public DispatchCenter(GeoPoint geoPoint, Long id, String address, String name) {
@@ -80,5 +89,51 @@ public class DispatchCenter extends Location{
     public DispatchCenter setName(String name) {
         this.name = name;
         return this;
+    }
+
+    public static class Builder {
+        @JsonProperty("id")
+        private Long id;
+
+        @JsonProperty("address")
+        private String address;
+
+        @JsonProperty("name")
+        private String name;
+
+        @JsonProperty("lon")
+        private double lon;
+
+        @JsonProperty("lat")
+        private double lat;
+
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLon(double lon) {
+            this.lon = lon;
+            return this;
+        }
+
+        public Builder setLat(double lat) {
+            this.lat = lat;
+            return this;
+        }
+
+        public DispatchCenter build() {
+            return new DispatchCenter(this);
+        }
     }
 }

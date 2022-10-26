@@ -3,13 +3,11 @@ package com.flag.robot_dispatch.controller;
 import com.flag.robot_dispatch.model.*;
 import com.flag.robot_dispatch.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.lang.invoke.VarHandle;
+import java.util.List;
 
 import static com.flag.robot_dispatch.model.MachineType.*;
 
@@ -47,30 +45,18 @@ public class VehicleController {
         vehicleService.addVehicle(vehicle);
     }
 
-/**
- get objects from frontend could be problematic
- This can be a factory pattern or a switch statement to get object from backend
- MachineType machine_type = null;
- switch (type) {
- case "Robot_light":
- machine_type = Robot_light;
- break;
- case "Robot_Heavy":
- machine_type = Robot_Heavy;
- break;
- case "Drone_light":
- machine_type = Drone_light;
- break;
- case "Drone_Heavy":
- machine_type = Drone_Heavy;
- break;
- }
-
- if (machine_type == null) {
- throw new RuntimeException();
- }
- */
 
 // TODO: add get and delete and update methods
-//    ! This is P0 features.
+//    This is P0 features.
+
+    @GetMapping(value = "/vehicles/center/{center}")
+    public List<Vehicle> listVehicleByCenter(@PathVariable Long center) {
+        return vehicleService.listByCenter(center);
+//        return 1;
+    }
+
+    @GetMapping(value = "/vehicles/{name}")
+    public Vehicle listVehicleByCenter(@PathVariable String name) {
+        return vehicleService.listByName(name);
+    }
 }

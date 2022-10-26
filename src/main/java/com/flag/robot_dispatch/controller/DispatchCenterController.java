@@ -27,12 +27,18 @@ public class DispatchCenterController {
             @RequestParam("id") Long id,
             @RequestParam("address") String address,
             @RequestParam("name") String name
-            )
-    {
+    ) {
 //        System.out.println(address);
         Location location = geoCodingService.getLatLng(address);
 //        System.out.println(location.getGeoPoint().getLat());
-        DispatchCenter center = new DispatchCenter(id, address, name, location.getGeoPoint().getLon(), location.getGeoPoint().getLat());
+        DispatchCenter center = new DispatchCenter.Builder()
+                .setId(id)
+                .setName(name)
+                .setAddress(address)
+                .setLon(location.getGeoPoint().getLon())
+                .setLat(location.getGeoPoint().getLat()).
+                build();
+//        DispatchCenter center = new DispatchCenter(id, address, name, location.getGeoPoint().getLon(), location.getGeoPoint().getLat());
         dispatchCenterService.add(center);
     }
 
