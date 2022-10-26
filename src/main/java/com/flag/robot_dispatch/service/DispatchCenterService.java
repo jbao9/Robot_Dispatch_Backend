@@ -21,4 +21,12 @@ public class DispatchCenterService {
         dispatchCenterRepository.save(center);
     }
 
+    public DispatchCenter getCenterById(Long id) {
+        return dispatchCenterRepository.findByIdIs(id);
+    }
+
+    public void deleteCenter(Long id) {
+        dispatchCenterRepository.deleteById(id);
+    }
+
 }
