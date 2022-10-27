@@ -14,7 +14,9 @@ public class User implements Serializable {
    private static final long serialVersionUID = 1L;
    @Id
    private String username;
+   @JsonIgnore             //new added
    private String password;
+   @JsonIgnore             //new added
    private boolean enabled;
 
    @OneToMany(mappedBy = "guest", fetch = FetchType.EAGER)     //new added
