@@ -55,7 +55,7 @@ public class VehicleController {
     }
 
     @GetMapping(value = "/vehicles/{id}")
-    public Vehicle getVehicleById(@PathVariable Long id) {
+    public List<Vehicle> getVehicleById(@PathVariable Long id) {
         return vehicleService.findById(id);
     }
 

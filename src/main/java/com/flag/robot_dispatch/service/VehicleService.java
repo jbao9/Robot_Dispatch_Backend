@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,8 +32,10 @@ public class VehicleService {
         return vehicleRepository.findById(new DispatchCenter.Builder().setId(center_id).build());
     }
 
-    public Vehicle findById(Long id) {
-        return vehicleRepository.findByIdIs(id);
+    public List<Vehicle> findById(Long id) {
+        List<Vehicle> value = new ArrayList<>();
+        value.add(vehicleRepository.findByIdIs(id));
+        return value;
     }
 
 
