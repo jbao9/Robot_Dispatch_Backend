@@ -15,9 +15,9 @@ import java.util.List;
 
 @RestController
 public class VehicleFilterController {
-    private VehicleFilterService vehicleFilterService;
-    private GeoCodingService geoCodingService;
-    private TimeRequirementService timeRequirementService;
+    private final VehicleFilterService vehicleFilterService;
+    private final GeoCodingService geoCodingService;
+    private final TimeRequirementService timeRequirementService;
 
     @Autowired
     public VehicleFilterController(VehicleFilterService vehicleFilterService,

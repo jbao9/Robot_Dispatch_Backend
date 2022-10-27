@@ -1,6 +1,5 @@
 package com.flag.robot_dispatch.filter;
 
-import com.flag.robot_dispatch.exception.InvalidInputException;
 import com.flag.robot_dispatch.model.Location;
 import com.flag.robot_dispatch.model.Vehicle;
 import com.flag.robot_dispatch.service.DistanceService;
@@ -14,7 +13,6 @@ public class VehicleSpeedFilter implements VehicleFilter {
     private Location pickupLocation;
     private Location deliveryLocation;
     private DistanceService distanceService = new DistanceService();
-
     private static final double SPEED_RATIO = 1.5;
 
 

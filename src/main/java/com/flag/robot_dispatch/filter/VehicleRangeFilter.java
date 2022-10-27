@@ -12,7 +12,6 @@ public class VehicleRangeFilter implements VehicleFilter {
     private Location pickupLocation;
     private Location deliveryLocation;
     private DistanceService distanceService = new DistanceService();
-
     private static final double RANGE_RATIO = 1.5;
 
     public VehicleRangeFilter(Location pickupLocation, Location deliveryLocation) {

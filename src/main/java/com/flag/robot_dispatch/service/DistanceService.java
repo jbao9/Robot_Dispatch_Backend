@@ -2,9 +2,7 @@ package com.flag.robot_dispatch.service;
 
 import com.flag.robot_dispatch.model.DispatchCenter;
 import com.flag.robot_dispatch.model.Location;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,11 +28,11 @@ public class DistanceService {
         double lat2 = Math.toRadians(pointA.getLat());
 
         // Haversine formula
-        double dlon = lon2 - lon1;
-        double dlat = lat2 - lat1;
-        double x = Math.pow(Math.sin(dlat / 2), 2)
+        double dLon = lon2 - lon1;
+        double dLat = lat2 - lat1;
+        double x = Math.pow(Math.sin(dLon / 2), 2)
                 + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(dlon / 2), 2);
+                * Math.pow(Math.sin(dLat / 2), 2);
 
         double c = 2 * Math.asin(Math.sqrt(x));
         // Radius of earth: 6371 in kilometers/3956 in miles

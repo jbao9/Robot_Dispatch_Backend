@@ -11,7 +11,6 @@ public class VehicleCapacityFilter implements VehicleFilter {
     private int widthRequirement;
     private int heightRequirement;
     private int weightRequirement;
-
     private static final double CAPACITY_RATIO = 1.2;
 
     public VehicleCapacityFilter(int lengthRequirement,

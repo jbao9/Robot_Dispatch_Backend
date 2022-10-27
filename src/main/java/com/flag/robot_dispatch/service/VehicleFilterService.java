@@ -68,4 +68,5 @@ public class VehicleFilterService {
         VehicleFilter andVehicleFilter = new AndVehicleFilter(vehicleFilterList);
         return andVehicleFilter.checkCondition(availableVehicles);
     }
+
 }
