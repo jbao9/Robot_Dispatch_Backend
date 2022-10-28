@@ -24,7 +24,11 @@ public class VehicleService {
     }
 
     public void addVehicle (Vehicle vehicle) {
+        if  (canAddVehicle(vehicle)) {
             vehicleRepository.save(vehicle);
+        } else {
+            throw new VehicleAlreadyExistException("Vehicle already exists");
+        }
     }
 
     public List<Vehicle> listByCenter(Long center_id) {
@@ -56,9 +60,9 @@ public class VehicleService {
 //        }
 //    }
 //
-//    private boolean canAddVehicle(Vehicle vehicle){
-//        return vehicleRepository.getReferenceById(vehicle.getId()) != null;
-//    }
+    private boolean canAddVehicle(Vehicle vehicle){
+        return !vehicleRepository.existsByName(vehicle.getName());
+    }
 
 
 }

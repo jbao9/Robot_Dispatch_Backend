@@ -11,6 +11,7 @@ import java.util.List;
 @JsonDeserialize(builder = VehicleType.Builder.class)
 public class VehicleType {
 
+//    , cascade = CascadeType.ALL
     @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     private List<Vehicle> vehicle;
 

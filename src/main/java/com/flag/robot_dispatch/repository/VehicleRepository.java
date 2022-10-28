@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
+    Boolean existsByName(String name);
+
     // TODO: findByStatus
     List<Vehicle> findByStatus(Status status);
 

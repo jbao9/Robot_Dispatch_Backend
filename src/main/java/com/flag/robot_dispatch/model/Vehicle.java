@@ -18,6 +18,7 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     private String name;
 
     @Enumerated(value = EnumType.STRING)
