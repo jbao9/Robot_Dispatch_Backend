@@ -2,6 +2,7 @@ package com.flag.robot_dispatch.service;
 
 import com.flag.robot_dispatch.exception.VehicleAlreadyExistException;
 import com.flag.robot_dispatch.exception.VehicleNotExistException;
+import com.flag.robot_dispatch.exception.VehicleNotFoundException;
 import com.flag.robot_dispatch.model.DispatchCenter;
 import com.flag.robot_dispatch.model.Vehicle;
 import com.flag.robot_dispatch.repository.VehicleRepository;
@@ -32,14 +33,24 @@ public class VehicleService {
     }
 
     public List<Vehicle> listByCenter(Long center_id) {
-
-        return vehicleRepository.findById(new DispatchCenter.Builder().setId(center_id).build());
+        List<Vehicle> list = vehicleRepository.findById(new DispatchCenter.Builder().setId(center_id).build());
+        if (list.isEmpty()) {
+            throw new VehicleNotFoundException("Vehicle not found");
+        } else {
+            return list;
+        }
     }
 
     public List<Vehicle> findById(Long id) {
         List<Vehicle> value = new ArrayList<>();
-        value.add(vehicleRepository.findByIdIs(id));
-        return value;
+        Vehicle vehicle = vehicleRepository.findByIdIs(id);
+
+        if (vehicle == null) {
+            throw new VehicleNotFoundException("Vehicle not found");
+        } else {
+            value.add(vehicle);
+            return value;
+        }
     }
 
 
