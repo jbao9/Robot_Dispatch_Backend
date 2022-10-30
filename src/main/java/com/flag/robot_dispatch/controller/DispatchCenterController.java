@@ -6,9 +6,7 @@ import com.flag.robot_dispatch.service.DispatchCenterService;
 import com.flag.robot_dispatch.service.GeoCodingService;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class DispatchCenterController {
@@ -27,11 +25,28 @@ public class DispatchCenterController {
             @RequestParam("id") Long id,
             @RequestParam("address") String address,
             @RequestParam("name") String name
-            )
-    {
+    ) {
+//        System.out.println(address);
         Location location = geoCodingService.getLatLng(address);
-        DispatchCenter center = new DispatchCenter(id, address, name, location.getGeoPoint().getLon(), location.getGeoPoint().getLat());
+//        System.out.println(location.getGeoPoint().getLat());
+        DispatchCenter center = new DispatchCenter.Builder()
+                .setId(id)
+                .setName(name)
+                .setAddress(address)
+                .setLon(location.getGeoPoint().getLon())
+                .setLat(location.getGeoPoint().getLat()).
+                build();
         dispatchCenterService.add(center);
+    }
+
+    @GetMapping(value = "/centers/{id}")
+    public DispatchCenter getCenter(@PathVariable Long id) {
+        return dispatchCenterService.getCenterById(id);
+    }
+
+    @DeleteMapping(value = "/centers/{id}")
+    public void deleteCenter(@PathVariable Long id) {
+        dispatchCenterService.deleteCenter(id);
     }
 
 }

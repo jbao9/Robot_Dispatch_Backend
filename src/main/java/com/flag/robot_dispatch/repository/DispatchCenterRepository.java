@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DispatchCenterRepository extends JpaRepository<DispatchCenter, Long> {
+    DispatchCenter findByIdIs(Long id);
 }

@@ -11,17 +11,22 @@ import java.util.List;
 @JsonDeserialize(builder = VehicleType.Builder.class)
 public class VehicleType {
 
+//    , cascade = CascadeType.ALL
     @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     private List<Vehicle> vehicle;
 
     @Id
-//    @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     @JsonProperty("machine_type")
-    private String type;
+    private MachineType type;
 
     private int weight_capacity;
 
-    private int volume_capacity;
+    private int length_capacity;
+
+    private int width_capacity;
+
+    private int height_capacity;
 
     private int speed;
 
@@ -42,13 +47,15 @@ public class VehicleType {
 //        this.image = builder.image;
         this.type = builder.type;
         this.speed = builder.speed;
-        this.volume_capacity = builder.volume_capacity;
+        this.width_capacity = builder.width_capacity;
+        this.height_capacity = builder.height_capacity;
+        this.length_capacity = builder.length_capacity;
         this.weight_capacity = builder.weight_capacity;
         this.delivery_range = builder.delivery_range;
     }
 
 
-    public String getType() {
+    public MachineType getType() {
         return type;
     }
 
@@ -56,8 +63,12 @@ public class VehicleType {
         return weight_capacity;
     }
 
-    public int getVolume_capacity() {
-        return volume_capacity;
+    public int getLength_capacity() { return length_capacity;}
+
+    public int getWidth_capacity() { return width_capacity;}
+
+    public int getHeight_capacity() {
+        return height_capacity;
     }
 
     public int getSpeed() {
@@ -77,13 +88,17 @@ public class VehicleType {
 
     public static class Builder {
         @JsonProperty("type")
-        private String type;
+        private MachineType type;
         @JsonProperty("weight_capacity")
         private int weight_capacity;
-        @JsonProperty("volume_capacity")
-        private int volume_capacity;
+        @JsonProperty("length_capacity")
+        private int length_capacity;
         @JsonProperty("speed")
         private int speed;
+        @JsonProperty("width_capacity")
+        private int width_capacity;
+        @JsonProperty("height_capacity")
+        private int height_capacity;
 //
 //        @JsonProperty("image")
 //        private VehicleImage image;
@@ -91,7 +106,7 @@ public class VehicleType {
         private int delivery_range;
 
 
-        public Builder setType(String type) {
+        public Builder setType(MachineType type) {
             this.type = type;
             return this;
         }
@@ -101,8 +116,18 @@ public class VehicleType {
             return this;
         }
 
-        public Builder setVolume_capacity(int volume_capacity) {
-            this.volume_capacity = volume_capacity;
+        public Builder setHeight_capacity(int height_capacity) {
+            this.height_capacity = height_capacity;
+            return this;
+        }
+
+        public Builder setWidth_capacity(int width_capacity) {
+            this.width_capacity = width_capacity;
+            return this;
+        }
+
+        public Builder setLength_capacity(int length_capacity) {
+            this.length_capacity = length_capacity;
             return this;
         }
 

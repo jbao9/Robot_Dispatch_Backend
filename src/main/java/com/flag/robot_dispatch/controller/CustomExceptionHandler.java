@@ -18,5 +18,10 @@ public class CustomExceptionHandler {
    public final ResponseEntity<String> handleUserNotExistExceptions(Exception ex, WebRequest request) {
       return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
    }
+
+   @ExceptionHandler(OrderNotExistException.class)
+   public final ResponseEntity<String> handleOrderNotExistExceptions(Exception ex, WebRequest request) {
+      return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+   }
 }
 

@@ -4,47 +4,45 @@ import com.flag.robot_dispatch.model.MachineType;
 import com.flag.robot_dispatch.model.VehicleType;
 import com.flag.robot_dispatch.service.VehicleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
 // TODO: FIX exception MachineType
-
-@Controller
+@RestController
 public class VehicleTypeController {
     private VehicleTypeService vehicleTypeService;
-
 
     @Autowired
     public VehicleTypeController(VehicleTypeService vehicleTypeService) {
         this.vehicleTypeService = vehicleTypeService;
-
     }
 
     @PostMapping("/vehicletype")
     public void addType(
-//            @RequestBody VehicleType vehicleType
             @RequestParam("type") String type,
             @RequestParam("speed") int speed,
-            @RequestParam("volume_capacity") int volume,
+            @RequestParam("height_capacity") int height,
+            @RequestParam("length_capacity") int length,
+            @RequestParam("width_capacity") int width,
             @RequestParam("weight_capacity") int weight,
-//            @RequestParam("image") MultipartFile[] images,
             @RequestParam("delivery_range") int range
     ) {
-//        MachineType machineType = MachineType.valueOf(type);
-//        MachineType machineType = MachineType.Drone_Heavy;
-//        System.out.print(machineType);
+        MachineType machineType = MachineType.valueOf(type);
         VehicleType vehicleType = new VehicleType.Builder()
-                .setType(type)
+                .setType(machineType)
                 .setSpeed(speed)
-                .setVolume_capacity(volume)
+                .setHeight_capacity(height)
+                .setLength_capacity(length)
+                .setWidth_capacity(width)
                 .setWeight_capacity(weight)
                 .setRange(range)
                 .build();
         vehicleTypeService.add(vehicleType);
+    }
 
+    @GetMapping(value = "/vehicletype/{type}")
+    public VehicleType getType(@PathVariable String type) {
+        return vehicleTypeService.getType(type);
     }
 
 }
+

@@ -11,9 +11,13 @@ import java.util.List;
 @Table(name = "vehicle")
 @JsonDeserialize(builder = Vehicle.Builder.class)
 public class Vehicle {
+    private static final long serialVersionUID = 1L;
+
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
 
     private String name;
 
@@ -39,7 +43,6 @@ public class Vehicle {
     }
 
     private Vehicle(Builder builder) {
-        this.id = builder.id;
         this.name = builder.name;
         this.status = builder.status;
         this.location = builder.location;
@@ -47,9 +50,7 @@ public class Vehicle {
 //        this.range = builder.range;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id;}
 
     public String getName() {
         return name;
@@ -67,12 +68,25 @@ public class Vehicle {
         return type;
     }
 
+    public Vehicle setType(VehicleType type) {
+        this.type = type;
+        return this;
+    }
+
+    public Vehicle setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Vehicle setCenter(DispatchCenter center) {
+        this.location = center;
+        return this;
+    }
+
 //    public int getRange() { return range; }
 
     public static class Builder {
 
-        @JsonProperty("id")
-        private Long id;
 
         @JsonProperty("name")
         private String name;
@@ -89,11 +103,6 @@ public class Vehicle {
 //        @JsonProperty("range")
 //        private int range;
 
-
-        public Builder setId(Long id) {
-            this.id = id;
-            return this;
-        }
 
         public Builder setName(String name) {
             this.name = name;
