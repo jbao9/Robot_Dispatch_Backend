@@ -39,7 +39,7 @@ public class TimeEstimateController {
             @RequestParam("vehicle_id") Long vehicleId
     ) {
 
-        Double deliveryDistance = distanceService.getDistance(
+        double deliveryDistance = distanceService.getDistance(
                 geoCodingService.getLatLng(pickupAddress),
                 geoCodingService.getLatLng(deliverAddress));
 

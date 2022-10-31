@@ -16,7 +16,7 @@ public class TimeEstimateService {
 
         Date date1;
         Date date2;
-        double deliveryTimeInHours = deliveryDistance / vehicle.getType().getSpeed() * TIME_ESTIMATE_RATIO + 1.0;
+        double deliveryTimeInHours = (deliveryDistance / vehicle.getType().getSpeed()) * TIME_ESTIMATE_RATIO + 1.0;
 
         SimpleDateFormat simpleDateFormat
                 = new SimpleDateFormat("HH:mm:ss");
