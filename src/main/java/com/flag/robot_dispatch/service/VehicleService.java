@@ -61,6 +61,13 @@ public class VehicleService {
             throw new VehicleNotExistException("Vehicle Does Not Exist");
         }
     }
+
+//    update vehicle status available -> unavailable
+//    public void assignVehicle(Long id) {
+//        try {
+//            vehicleRepository.
+//        }
+//    }
 //
 //    public Vehicle updateVehicle(Vehicle vehicle){
 //        Vehicle prevVehicle = vehicleRepository.getReferenceById(vehicle.getId());

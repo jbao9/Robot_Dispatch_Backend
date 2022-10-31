@@ -46,8 +46,8 @@ public class DeliveryController {
             @RequestParam("description") String description,
             @RequestParam("expect_pickup_time") String expectPickupTime,
             @RequestParam("expect_delivery_date") String expectDeliveryDate,
-            @RequestParam("vehicle_id") Vehicle vehicleId,
-            @RequestParam("center_id") DispatchCenter centerId,
+            @RequestParam("vehicle_id") Long vehicleId,
+            @RequestParam("center_id") Long centerId,
             Principal principal) {
         Order order = new Order.Builder()
                 .setPickupAddress(pickupAddress)
@@ -63,10 +63,11 @@ public class DeliveryController {
                 .setExpectDeliveryDate(LocalDate.parse(expectDeliveryDate))
                 .setOrderDate(LocalDate.now())
                 .setGuest(new User.Builder().setUsername(principal.getName()).build())
-                .setVehicleId(vehicleId)
-                .setCenterId(centerId)
                 .build();
-        deliveryService.addDelivery(order);
+        DispatchCenter dispatchCenter = new DispatchCenter();
+        Vehicle vehicle = new Vehicle();
+        order.setVehicle(vehicle.setId(vehicleId)).setCenter(dispatchCenter.setId(centerId));
+        deliveryService.addDelivery(order, vehicleId);
     }
 
     @DeleteMapping("/deliveries/{orderId}")

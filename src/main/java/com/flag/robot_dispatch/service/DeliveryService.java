@@ -1,12 +1,12 @@
 package com.flag.robot_dispatch.service;
 
-import com.flag.robot_dispatch.exception.OrderAlreadyExistException;
-import com.flag.robot_dispatch.exception.OrderNotExistException;
-import com.flag.robot_dispatch.exception.VehicleNotExistException;
+import com.flag.robot_dispatch.exception.*;
 import com.flag.robot_dispatch.model.Order;
+import com.flag.robot_dispatch.model.Status;
 import com.flag.robot_dispatch.model.User;
 import com.flag.robot_dispatch.model.Vehicle;
 import com.flag.robot_dispatch.repository.OrderRepository;
+import com.flag.robot_dispatch.repository.VehicleRepository;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,12 @@ import java.util.List;
 @Service
 public class DeliveryService {
     private OrderRepository orderRepository;
+    private VehicleRepository vehicleRepository;
 
     @Autowired
-    public DeliveryService(OrderRepository orderRepository) {
+    public DeliveryService(OrderRepository orderRepository, VehicleRepository vehicleRepository) {
         this.orderRepository = orderRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
@@ -36,10 +38,17 @@ public class DeliveryService {
         }
     }
 
-
+ // Check if the vehicle is available. if Yes, then assign the task to the vehicle.
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void addDelivery(Order order) {
-        orderRepository.save(order);
+    public void addDelivery(Order order, Long vehicleId) {
+        Status status = vehicleRepository.findStatusById(vehicleId);
+        if (status == Status.available) {
+            orderRepository.save(order);
+            vehicleRepository.updateStatus(vehicleId, Status.unavailable);
+        } else {
+            throw new VehicleNotAvailableException("Vehicle is on duty, Please Select another vehicle");
+        }
+
     }
 
     public Order updateDelivery(Order order){

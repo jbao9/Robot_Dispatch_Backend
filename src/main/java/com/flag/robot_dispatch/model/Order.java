@@ -160,6 +160,16 @@ public class Order implements Serializable {
         return center;
     }
 
+    public Order setCenter(DispatchCenter center) {
+        this.center = center;
+        return this;
+    }
+
+    public Order setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+        return this;
+    }
+
     public static class Builder {
         @JsonProperty("order_id")
         private Long orderId;
