@@ -5,12 +5,10 @@ import com.flag.robot_dispatch.service.DistanceService;
 import com.flag.robot_dispatch.service.GeoCodingService;
 import com.flag.robot_dispatch.service.TimeEstimateService;
 import com.flag.robot_dispatch.service.VehicleService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Time;
 import java.util.List;
 
 @RestController
@@ -51,5 +49,4 @@ public class TimeEstimateController {
                 deliveryVehicles.get(0)
         );
     }
-
 }
