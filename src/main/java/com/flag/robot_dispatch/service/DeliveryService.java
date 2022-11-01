@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -73,8 +74,17 @@ public class DeliveryService {
         return order;
     }
 
-    public Order listByOrderId(Long orderId) {
-        return orderRepository.findByOrderId(orderId);
+    public List<Order> listByOrderId(Long orderId) throws OrderNotExistException{
+        List<Order> value = new ArrayList<>();
+        Order order = orderRepository.findByOrderId(orderId);
+
+        if (order == null) {
+            throw new OrderNotExistException("Order doesn't exist");
+        } else {
+            value.add(order);
+            return value;
+        }
     }
+
 
 }

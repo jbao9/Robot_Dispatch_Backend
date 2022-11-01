@@ -35,7 +35,7 @@ public class DeliveryController {
 
     //for admin use
     @GetMapping(value = "/deliveries_admin/{orderId}")
-    public Order getDeliveryOrder(@PathVariable Long orderId) {
+    public List<Order> getDeliveryOrder(@PathVariable Long orderId) {
         return deliveryService.listByOrderId(orderId);
     }
 
