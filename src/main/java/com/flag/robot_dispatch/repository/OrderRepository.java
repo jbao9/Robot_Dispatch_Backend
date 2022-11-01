@@ -5,6 +5,7 @@ import com.flag.robot_dispatch.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -14,4 +15,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Order findByOrderIdAndGuest(Long orderId, User guest);
 
     Order findByOrderId(Long orderId);
+
+    List<Order> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
 }

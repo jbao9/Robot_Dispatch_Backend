@@ -25,7 +25,7 @@ public class VehicleController {
 
 
     @PostMapping(value = "/vehicles")
-    public void addVehicle(
+    public Vehicle addVehicle(
             @RequestParam("name") String name,
             @RequestParam("status") String status,
             @RequestParam("center_id") Long center_id,
@@ -43,6 +43,8 @@ public class VehicleController {
         vehicle.setType(new VehicleType.Builder().setType(machineType).build());
         vehicle.setCenter(dispatchCenter.setId(center_id));
         vehicleService.addVehicle(vehicle);
+
+        return vehicle;
     }
 
 
