@@ -33,6 +33,12 @@ public class DeliveryController {
         return deliveryService.findByIdAndGuest(orderId, principal.getName());
     }
 
+    //for admin use
+    @GetMapping(value = "/deliveries_admin/{orderId}")
+    public Order getDeliveryOrder(@PathVariable Long orderId) {
+        return deliveryService.listByOrderId(orderId);
+    }
+
     @PostMapping("/deliveries")
     public void addDeliveryOrder(
             @RequestParam("pickup_address") String pickupAddress,
