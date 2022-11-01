@@ -72,4 +72,9 @@ public class DeliveryService {
         }
         return order;
     }
+
+    public Order listByOrderId(Long orderId) {
+        return orderRepository.findByOrderId(orderId);
+    }
+
 }
