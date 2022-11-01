@@ -16,7 +16,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     Boolean existsByName(String name);
 
-    // TODO: findByStatus
     List<Vehicle> findByStatus(Status status);
 
     @Query("SELECT v FROM Vehicle v WHERE v.location = :center")

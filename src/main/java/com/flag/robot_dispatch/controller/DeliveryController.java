@@ -28,13 +28,20 @@ public class DeliveryController {
         return deliveryService.listByGuest(principal.getName());
     }
 
+    @GetMapping(value = "/deliveries/tn/{trackingNo}")
+    public Order getDeliveryOrderByTrackingNo(@PathVariable String trackingNo, Principal principal) {
+        String orderIdStr = trackingNo.substring(6);
+        Long orderId = Long.parseLong(orderIdStr);
+        return deliveryService.findByIdAndGuest(orderId, principal.getName());
+    }
+
     @GetMapping(value = "/deliveries/{orderId}")
     public Order getDeliveryOrder(@PathVariable Long orderId, Principal principal) {
         return deliveryService.findByIdAndGuest(orderId, principal.getName());
     }
 
     @PostMapping("/deliveries")
-    public void addDeliveryOrder(
+    public String addDeliveryOrder(
             @RequestParam("pickup_address") String pickupAddress,
             @RequestParam("pickup_zipcode") int pickupZipcode,
             @RequestParam("deliver_address") String deliverAddress,
@@ -68,6 +75,9 @@ public class DeliveryController {
         Vehicle vehicle = new Vehicle();
         order.setVehicle(vehicle.setId(vehicleId)).setCenter(dispatchCenter.setId(centerId));
         deliveryService.addDelivery(order, vehicleId);
+        Long orderId = order.getOrderId();
+        String trackingNo = "DD" + "0000" + orderId;
+        return trackingNo;
     }
 
     @DeleteMapping("/deliveries/{orderId}")
