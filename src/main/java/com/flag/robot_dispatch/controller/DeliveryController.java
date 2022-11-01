@@ -1,5 +1,6 @@
 package com.flag.robot_dispatch.controller;
 
+import com.flag.robot_dispatch.exception.InvalidOrderDateException;
 import com.flag.robot_dispatch.model.DispatchCenter;
 import com.flag.robot_dispatch.model.Order;
 import com.flag.robot_dispatch.model.User;
@@ -28,6 +29,7 @@ public class DeliveryController {
         return deliveryService.listByGuest(principal.getName());
     }
 
+    //for guest use
     @GetMapping(value = "/deliveries/{orderId}")
     public Order getDeliveryOrder(@PathVariable Long orderId, Principal principal) {
         return deliveryService.findByIdAndGuest(orderId, principal.getName());
@@ -37,6 +39,19 @@ public class DeliveryController {
     @GetMapping(value = "/deliveries_admin/{orderId}")
     public List<Order> getDeliveryOrder(@PathVariable Long orderId) {
         return deliveryService.listByOrderId(orderId);
+    }
+
+    // get delivery orders by order date range
+    @GetMapping(value = "/deliveries_admin")
+    public List<Order> listOrdersBetweenOrderDates(
+            @RequestParam("order_date_start") String startDate,
+            @RequestParam("order_date_end") String endDate) {
+        if (LocalDate.parse(endDate).isBefore(LocalDate.parse(startDate)) || LocalDate.parse(endDate).isAfter(LocalDate.now())
+        || LocalDate.parse(startDate).isAfter(LocalDate.now())) {
+            throw new InvalidOrderDateException("Invalid order date");
+        }  else {
+            return deliveryService.listByOrderDate(LocalDate.parse(startDate), LocalDate.parse(endDate));
+        }
     }
 
     @PostMapping("/deliveries")

@@ -7,12 +7,12 @@ import com.flag.robot_dispatch.model.User;
 import com.flag.robot_dispatch.model.Vehicle;
 import com.flag.robot_dispatch.repository.OrderRepository;
 import com.flag.robot_dispatch.repository.VehicleRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +84,11 @@ public class DeliveryService {
             value.add(order);
             return value;
         }
+    }
+
+    // search orders by order date range
+    public List<Order> listByOrderDate(LocalDate startDate, LocalDate endDate) {
+        return orderRepository.findByOrderDateBetween(startDate, endDate);
     }
 
 
