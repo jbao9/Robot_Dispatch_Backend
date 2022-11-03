@@ -156,9 +156,17 @@ public class Order implements Serializable {
         return vehicle;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
     public DispatchCenter getCenterId() {
         return center;
     }
+
+    public DispatchCenter getCenter() {
+        return center;
+    }    
 
     public Order setCenter(DispatchCenter center) {
         this.center = center;
@@ -167,6 +175,66 @@ public class Order implements Serializable {
 
     public Order setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+        return this;
+    }
+
+    public Order setWeight(float weight) {
+        this.weight = weight;
+        return this;
+    }
+
+    public Order setLength(float length) {
+        this.length = length;
+        return this;
+    }
+
+    public Order setWidth(float width) {
+        this.width = width;
+        return this;
+    }
+
+    public Order setHeight(float height) {
+        this.height = height;
+        return this;
+    }
+
+    public Order setPickupAddress(String pickupAddress) {
+        this.pickupAddress = pickupAddress;
+        return this;
+    }
+
+    public Order setPickupZipcode(int pickupZipcode) {
+        this.pickupZipcode = pickupZipcode;
+        return this;
+    }
+
+    public Order setDeliverAddress(String deliverAddress) {
+        this.deliverAddress = deliverAddress;
+        return this;
+    }
+
+    public Order setDeliverZipcode(int deliverZipcode) {
+        this.deliverZipcode = deliverZipcode;
+        return this;
+    }
+
+    public Order setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Order setExpectPickupTime(LocalTime expectPickupTime) {
+        this.expectPickupTime = expectPickupTime;
+        return this;
+    }
+
+    public Order setExpectDeliveryDate(LocalDate expectDeliveryDate) {
+        this.expectDeliveryDate = expectDeliveryDate;
+        return this;
+    }
+
+    public Order setDeliveredDate(LocalDate deliveredDate) {
+        this.deliveredDate = deliveredDate;
         return this;
     }
 
@@ -222,7 +290,12 @@ public class Order implements Serializable {
         @JsonProperty("center_id")
         private DispatchCenter centerId;
 
-        public Builder setId(Long orderId) {
+        public Builder setId() {
+            this.orderId = orderId;
+            return this;
+        }
+
+        public Builder setId(Long orderId) {   //new added
             this.orderId = orderId;
             return this;
         }
