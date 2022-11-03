@@ -28,5 +28,10 @@ public class CustomExceptionHandler {
    public final ResponseEntity<String> handleOInvalidOrderDateExceptions(Exception ex, WebRequest request) {
       return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
    }
+
+   @ExceptionHandler(InvalidInputException.class)
+   public final ResponseEntity<String> handleOInvalidInputException(Exception ex, WebRequest request) {
+      return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+   }
 }
 

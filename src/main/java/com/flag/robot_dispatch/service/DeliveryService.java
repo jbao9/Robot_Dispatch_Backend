@@ -52,15 +52,28 @@ public class DeliveryService {
 
     }
 
-    public Order updateDelivery(Order order){
-        Order prevOrder = orderRepository.getReferenceById(order.getOrderId());
+    /*
+    public Order updateDelivery(Long orderId) {
+        Order order = orderRepository.findByOrderId(orderId);
+        if (order != null) {
+            return orderRepository.save(order);
+        } else {
+            throw new OrderNotExistException("No Order Found for Update");
+        }
+    }
 
+     */
+
+
+    public Order updateDelivery(Order order) {
+        Order prevOrder = orderRepository.getReferenceById(order.getOrderId());
         if(prevOrder != null){
             return orderRepository.save(order);
         } else {
             throw new OrderNotExistException("No Order Found for Update");
         }
     }
+
 
     public List<Order> listByGuest(String username) {
         return orderRepository.findByGuest(new User.Builder().setUsername(username).build());
@@ -85,6 +98,17 @@ public class DeliveryService {
             return value;
         }
     }
+
+    public Order findByOrderId(Long orderId) throws OrderNotExistException {
+        Order order = orderRepository.findByOrderId(orderId);
+
+        if (order == null) {
+            throw new OrderNotExistException("Order doesn't exist");
+        } else {
+            return order;
+        }
+    }
+
 
     // search orders by order date range
     public List<Order> listByOrderDate(LocalDate startDate, LocalDate endDate) {
