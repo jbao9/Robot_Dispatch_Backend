@@ -8,6 +8,7 @@ import com.flag.robot_dispatch.service.TimeRequirementService;
 import com.flag.robot_dispatch.service.VehicleFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class VehicleFilterController {
         this.timeRequirementService = timeRequirementService;
     }
 
-    @GetMapping("/available_vehicles")
+    @PostMapping("/available_vehicles")
     public List<Vehicle> getFilteredVehicles(
             @RequestParam(name = "pickup_address") String pickupAddress,
             @RequestParam(name = "delivery_address") String deliveryAddress,
