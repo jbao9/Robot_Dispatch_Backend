@@ -166,7 +166,7 @@ public class Order implements Serializable {
 
     public DispatchCenter getCenter() {
         return center;
-    }    
+    }
 
     public Order setCenter(DispatchCenter center) {
         this.center = center;

@@ -52,19 +52,6 @@ public class DeliveryService {
 
     }
 
-    /*
-    public Order updateDelivery(Long orderId) {
-        Order order = orderRepository.findByOrderId(orderId);
-        if (order != null) {
-            return orderRepository.save(order);
-        } else {
-            throw new OrderNotExistException("No Order Found for Update");
-        }
-    }
-
-     */
-
-
     public Order updateDelivery(Order order) {
         Order prevOrder = orderRepository.getReferenceById(order.getOrderId());
         if(prevOrder != null){
