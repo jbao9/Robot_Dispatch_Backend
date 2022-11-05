@@ -35,7 +35,11 @@ public class DeliveryService {
             throw new OrderNotExistException("Order doesn't exist");
         }
         if (order != null) {
+            Vehicle vehicle = order.getVehicleId();
+            Long vehicleId = vehicle.getId();
+            vehicleRepository.updateStatus(vehicleId, Status.available);
             orderRepository.deleteById(orderId);
+
         }
     }
 

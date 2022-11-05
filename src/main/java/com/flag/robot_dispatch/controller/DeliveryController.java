@@ -24,7 +24,6 @@ public class DeliveryController {
     private DeliveryService deliveryService;
     private GeoCodingService geoCodingService;
     private DispatchCenterService dispatchCenterService;
-    private VehicleService vehicleService;
 
     @Autowired
     public DeliveryController(DeliveryService deliveryService, GeoCodingService geoCodingService, DispatchCenterService dispatchCenterService) {
