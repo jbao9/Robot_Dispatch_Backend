@@ -2,11 +2,11 @@ package com.flag.robot_dispatch.controller;
 
 import com.flag.robot_dispatch.exception.InvalidInputException;
 import com.flag.robot_dispatch.exception.InvalidOrderDateException;
-import com.flag.robot_dispatch.model.DispatchCenter;
-import com.flag.robot_dispatch.model.Order;
-import com.flag.robot_dispatch.model.User;
-import com.flag.robot_dispatch.model.Vehicle;
+import com.flag.robot_dispatch.model.*;
 import com.flag.robot_dispatch.service.DeliveryService;
+import com.flag.robot_dispatch.service.DispatchCenterService;
+import com.flag.robot_dispatch.service.GeoCodingService;
+import com.flag.robot_dispatch.service.VehicleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -16,17 +16,20 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 @RestController
 public class DeliveryController {
     private DeliveryService deliveryService;
+    private GeoCodingService geoCodingService;
+    private DispatchCenterService dispatchCenterService;
 
     @Autowired
-    public DeliveryController(DeliveryService deliveryService) {
+    public DeliveryController(DeliveryService deliveryService, GeoCodingService geoCodingService, DispatchCenterService dispatchCenterService) {
+        this.dispatchCenterService = dispatchCenterService;
         this.deliveryService = deliveryService;
+        this.geoCodingService = geoCodingService;
     }
 
     //guest list all orders of his/her own
@@ -71,7 +74,7 @@ public class DeliveryController {
 
     // guest create order
     @PostMapping("/deliveries")
-    public String addDeliveryOrder(
+    public HashMap<String, Object> addDeliveryOrder(
             @RequestParam("pickup_address") String pickupAddress,
             @RequestParam("pickup_zipcode") int pickupZipcode,
             @RequestParam("deliver_address") String deliverAddress,
@@ -107,7 +110,18 @@ public class DeliveryController {
         deliveryService.addDelivery(order, vehicleId);
         Long orderId = order.getOrderId();
         String trackingNo = "DD" + "0000" + orderId;
-        return trackingNo;
+        DispatchCenter center = dispatchCenterService.getCenterById(centerId);
+        Double centerLat = center.getLat();
+        Double centerLon = center.getLon();
+
+        Location pickupLocation = geoCodingService.getLatLng(pickupAddress);
+
+        HashMap<String, Object> deliveryMap = new HashMap<>();
+        deliveryMap.put("OriginLat", centerLat);
+        deliveryMap.put("OriginLon", centerLon);
+        deliveryMap.put("DesLoc", pickupLocation);
+        deliveryMap.put("TrackNo", trackingNo);
+        return deliveryMap;
     }
 
     // guest delete order
